@@ -2,9 +2,11 @@ import inquirer from 'inquirer';
 import child from 'child_process';
 import fs from 'fs';
 import chalk from 'chalk';
+import os from 'os';
 
 const text = '# Hier kannst du mehr erfahren!';
 const file = './';
+const isWindows = os.platform();
 
 inquirer
   .prompt([
@@ -17,6 +19,7 @@ inquirer
   ])
   .then(answers => {
     console.info(chalk.bgGreen('Antwort:', answers.anweisung));
+    console.info(chalk.bgBlue('Betriebssystem:', isWindows));
 
     if (answers.anweisung == 'Neue Git Repo') {
       child.exec('git init', (error, stdout, stderr) => {
